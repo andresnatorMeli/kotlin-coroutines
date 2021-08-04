@@ -7,7 +7,7 @@ import kotlin.system.measureTimeMillis
 fun main() {
     testSync()
     testAsync()
-    Thread.sleep(4000L)
+    Thread.sleep(2000L)
 }
 
 private fun testSync() {
@@ -34,8 +34,7 @@ private fun testAsync() {
             val response1 = async { getInfoHeavyFromApi(1) }
             val response2 = async { getInfoHeavyFromApi(2) }
 
-            println(response1)
-            println(response2)
+            println(response1.await())
             println(response2.await())
         }
         println("tiempo transcurrido  testAsync $time")
