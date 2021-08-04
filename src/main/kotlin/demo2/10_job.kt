@@ -1,34 +1,39 @@
 package demo2
 
 
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
-
 fun main() = runBlocking {
+
     val job = launch {
+        println("padre launch")
 
         launch {
             delay(500)
-            println("primer lauch")
+            println("primer launch")
         }
 
         launch {
             delay(1000)
-            println("segundo lauch")
+            println("segundo launch")
         }
+
     }
 
-    Thread.sleep(2000)
+    delay(2000)
     job.cancel()
     job.join()
+    //job.cancelAndJoin()
 
-
+    //stateJobs()
 }
 
-fun maifdfn() = runBlocking {
+
+fun stateJobs() = runBlocking {
     val job = launch {
         repeat(1000) { i ->
             println("job: I'm working $i ...")
